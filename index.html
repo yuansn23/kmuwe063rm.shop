@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Trade Republic - Offizielle Aktien-Community</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: linear-gradient(135deg, #001122 0%, #003366 50%, #001a33 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .primary-heading {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 800;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .secondary-heading {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .content-text {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            color: #e6f3ff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            font-size: clamp(0.95rem, 2.3vw, 1.1rem);
+            line-height: 1.8;
+            color: #ffffff;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 15px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border: none;
+            padding: 18px 45px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: bold;
+            color: #000000;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            animation: buttonPulse 2s infinite;
+            display: block;
+            margin: 25px auto;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.7);
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+        }
+
+        .countdown-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid #FFD700;
+        }
+
+        .countdown-text {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .timer-display {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #FF4444;
+            font-weight: bold;
+            animation: timerBlink 1s infinite;
+        }
+
+        .disclaimer-section {
+            margin-top: 60px;
+            padding: 40px 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+
+        .disclaimer-title {
+            font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .disclaimer-text {
+            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            line-height: 1.7;
+            color: #cccccc;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            padding: 25px 0;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        .footer-link {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #FFA500;
+            text-decoration: underline;
+        }
+
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border: none;
+            padding: 15px 60px;
+            font-size: clamp(1rem, 2.8vw, 1.2rem);
+            font-weight: bold;
+            color: #000000;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+            animation: breathingEffect 1.5s ease-in-out infinite;
+            white-space: nowrap;
+            min-width: 300px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .floating-cta:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes breathingEffect {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.08);
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.9);
+            }
+        }
+
+        @keyframes timerBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 15px;
+            }
+            
+            .content-section {
+                margin-bottom: 25px;
+                padding: 20px 15px;
+            }
+            
+            .disclaimer-section {
+                padding: 25px 20px;
+                margin-top: 40px;
+            }
+            
+            .floating-cta {
+                min-width: 280px;
+                padding: 12px 40px;
+                bottom: 15px;
+            }
+            
+            .footer-link {
+                margin: 10px 15px;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section {
+                margin-bottom: 20px;
+                padding: 15px 10px;
+            }
+            
+            .floating-cta {
+                min-width: 260px;
+                padding: 10px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="main-container">
+            <section class="content-section">
+                <h1 class="primary-heading">Trade Republic Offizielle Aktien-Community ist jetzt online!</h1>
+                <p class="content-text">Treten Sie sofort unserer WhatsApp-Community bei und erhalten Sie 10 ausgewählte Aktientipps</p>
+                
+                <div class="countdown-section">
+                    <p class="countdown-text">Derzeit nur noch 30 Plätze verfügbar</p>
+                    <div class="timer-display" id="countdown">Letzte 2 Tage Countdown</div>
+                </div>
+                
+                <img src="img/2.jpg" alt="" class="content-image">
+                <button class="cta-button" onclick="oprr()">WhatsApp-Community beitreten</button>
+            </section>
+
+            <section class="content-section">
+                <h2 class="secondary-heading">Das können Sie erwarten:</h2>
+                <ul class="feature-list">
+                    <li class="feature-item">Tägliche Marktstrategien - Rechtzeitige Einblicke in vorbörsliche Handelsmöglichkeiten</li>
+                    <li class="feature-item">Grundlagen der Aktieninvestition - Geeignet für Anfänger, hilft Ihnen ein solides Fundament zu schaffen</li>
+                    <li class="feature-item">Technische Analyse - Lernen Sie Preisbewegungen zu interpretieren und Ihre Entscheidungsfähigkeit zu verbessern</li>
+                    <li class="feature-item">Strategien cleverer Investoren - Beherrschen Sie fortgeschrittene Handelstechniken</li>
+                    <li class="feature-item">Portfolio-Management - Hilft Ihnen langfristigen Anlageerfolg zu erzielen</li>
+                    <li class="feature-item">Wirtschafts- und Markttrends - Verstehen Sie die makroökonomischen Faktoren, die die Märkte antreiben</li>
+                    <li class="feature-item">Weitere praktische Ressourcen - Erweitern Sie Ihr Anlagewissen</li>
+                </ul>
+                <p class="content-text">Unsere Aktienmarkt-Experten werden wertvolle Erkenntnisse teilen und kostenlose Aktienanalysen bereitstellen!</p>
+                <img src="img/1.jpg" alt="" class="content-image">
+                <button class="cta-button" onclick="oprr()">WhatsApp-Community beitreten</button>
+            </section>
+
+            <section class="content-section">
+                <h2 class="secondary-heading">Erstellen Sie Ihr Anlageportfolio!</h2>
+                <p class="content-text">Lernen Sie effektive technische Analysemethoden, um Ihre Anlageentscheidungen zu verbessern. Entwickeln Sie vernünftige Strategien, die Ihnen beim Risikomanagement helfen. Teilen Sie Anlageeinsichten mit Community-Mitgliedern und treffen Sie gemeinsam klügere Entscheidungen.</p>
+                <p class="content-text">Treten Sie sofort der WhatsApp-Community bei und erhalten Sie 10 kostenlose Aktientipps</p>
+                <img src="img/3.jpg" alt="" class="content-image">
+                <button class="cta-button" onclick="oprr()">WhatsApp-Community beitreten</button>
+            </section>
+
+            <section class="disclaimer-section">
+                <h3 class="disclaimer-title">Wichtige Offenlegung - Keine Anlageberatung</h3>
+                <p class="disclaimer-text">Die auf dieser Seite bereitgestellten Informationen dienen ausschließlich Bildungs- und Werbezwecken und stellen keine Form von Anlageberatung, Wertpapierempfehlungen oder Finanzplanungsdienstleistungen dar. Sie sollten Anlageentscheidungen basierend auf Ihrer persönlichen finanziellen Situation und Risikobereitschaft treffen und einen lizenzierten professionellen Berater konsultieren, bevor Sie Anlageentscheidungen treffen.</p>
+                
+                <p class="disclaimer-text">Historische Wertentwicklungen sind kein Indikator für zukünftige Erträge. Alle Anlagen bergen Risiken, einschließlich des möglichen Verlustes des eingesetzten Kapitals. Die Wertentwicklung von Anlagen kann schwanken und Anleger können mehr oder weniger als ihre ursprüngliche Investition zurückerhalten.</p>
+                
+                
+                <p class="disclaimer-text">Die bereitgestellten Aktientipps und Marktanalysen basieren auf öffentlich verfügbaren Informationen und persönlichen Meinungen. Sie stellen keine Garantie für zukünftige Marktentwicklungen oder Anlagerenditen dar. Anleger sollten ihre eigene Due-Diligence-Prüfung durchführen und professionelle Finanzberatung einholen.</p>
+                
+               
+                <div class="footer-links">
+                    <a href="privacy.html" target="_blank" class="footer-link">Datenschutzrichtlinie</a>
+                    <a href="User Agreement.html" target="_blank" class="footer-link">Nutzungsbedingungen</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <button class="floating-cta" onclick="oprr()">Jetzt WhatsApp beitreten</button>
+
+    <script>
+        function oprr() {
+            window.open('https://wa.me/', '_blank');
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const endTime = now + (2 * 24 * 60 * 60 * 1000); // 2 days from now
+            
+            setInterval(function() {
+                const currentTime = new Date().getTime();
+                const timeLeft = endTime - currentTime;
+                
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown').innerHTML = 
+                    days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+                
+                if (timeLeft < 0) {
+                    document.getElementById('countdown').innerHTML = "ABGELAUFEN";
+                }
+            }, 1000);
+        }
+
+        // Zoom prevention
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Initialize countdown on page load
+        window.onload = function() {
+            updateCountdown();
+        }
+    </script>
+</body>
+</html>
